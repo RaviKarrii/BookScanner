@@ -8,15 +8,11 @@ app = Flask(__name__)
 def hello():
     return "Hello World!"
 
-@app.route('/twopage')
+@app.route('/twopage',methods=['POST'])
 def twopage():
     if request.method == 'POST':
-        f = request.files.getlist("file")
-        for i in f:
-            try:
-                i.save(os.path.join("/tmp/",secure_filename(i.filename)))
-            except e:
-                return e
+        for i in request.files.getlist('file'):
+            i.save(os.path.join("tmp/",secure_filename(i.filename)))
     return 'file uploaded successfully'
 
 if __name__ == '__main__':
