@@ -16,5 +16,5 @@ def twopage():
     return 'file uploaded successfully'
 
 if __name__ == '__main__':
-    app.config['UPLOAD_FOLDER'] = "/tmp/"
+    app.config['UPLOAD_FOLDER'] = "/tmp"
     app.run()
