@@ -13,7 +13,10 @@ def twopage():
     if request.method == 'POST':
         f = request.files.getlist("file")
         for i in f:
-            i.save(os.path.join("/tmp/",secure_filename(i.filename)))
+            try:
+                i.save(os.path.join("/tmp/",secure_filename(i.filename)))
+            except e:
+                return e
     return 'file uploaded successfully'
 
 if __name__ == '__main__':
