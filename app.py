@@ -12,7 +12,7 @@ def hello():
 def twopage():
     if request.method == 'POST':
         for i in request.files.getlist('file'):
-            i.save(os.path.join("tmp/",secure_filename(i.filename)))
+            i.save(os.path.join("/tmp/",secure_filename(i.filename)))
     return 'file uploaded successfully'
 
 if __name__ == '__main__':
