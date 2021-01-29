@@ -31,19 +31,17 @@ def process_files(folder):
 
 @app.route('/twopage',methods=['POST'])
 def twopage():
-    folder = id_generator() + "/"
-    if not os.path.exists("/tmp/"+folder):
-        os.makedirs("/tmp/"+folder)
-    if request.method == 'POST':
-        for i in request.files.getlist('file'):
-            i.save(os.path.join("/tmp/"+folder,secure_filename(i.filename)))
-        process_files(folder)
     try:
-        shutil.rmtree("/tmp/"+folder)
-    except OSError as e:
-        print ("Error: %s - %s." % (e.filename, e.strerror))
-    finally:
+        folder = id_generator() + "/"
+        if not os.path.exists("/tmp/"+folder):
+            os.makedirs("/tmp/"+folder)
+        if request.method == 'POST':
+            for i in request.files.getlist('file'):
+                i.save(os.path.join("/tmp/"+folder,secure_filename(i.filename)))
+            process_files(folder)
         return send_file("/tmp/"+folder+"SR.pdf", attachment_filename='SR.pdf')
+    finally:
+        shutil.rmtree("/tmp/"+folder)
 
 if __name__ == '__main__':
     app.run()
