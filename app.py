@@ -21,6 +21,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 def process_files(folder):
     mypath = "/tmp/"+folder
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+    onlyfiles = sorted(onlyfiles)
     final = []
     for i in onlyfiles:
         #print(i)
